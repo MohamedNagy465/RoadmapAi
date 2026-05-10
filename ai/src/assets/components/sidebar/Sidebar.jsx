@@ -15,6 +15,7 @@ import {
 import {
   Link,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 
 function SidebarItem({
@@ -47,6 +48,20 @@ function SidebarItem({
 }
 
 export default function Sidebar() {
+
+  const navigate =
+    useNavigate();
+
+  /* LOGOUT */
+  const handleLogout =
+    () => {
+
+      localStorage.removeItem(
+        'isLoggedIn'
+      );
+
+      navigate('/login');
+    };
 
   return (
     <aside
@@ -165,15 +180,15 @@ export default function Sidebar() {
         className="pt-6"
       >
 
-        <SidebarItem
-          icon={
-            <LogOut
-              size={18}
-            />
-          }
-          text="Logout"
-          to="/login"
-        />
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-gray-300 transition hover:bg-white/5 hover:text-white"
+        >
+
+          <LogOut size={18} />
+
+          Logout
+        </button>
       </div>
     </aside>
   );

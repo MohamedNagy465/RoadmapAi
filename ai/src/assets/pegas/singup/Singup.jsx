@@ -133,17 +133,24 @@ export default function SignupPage() {
       >
 
         {/* LOGO */}
-        <div className="z-10 flex items-center gap-3">
-
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl font-bold text-[#5C45FD] shadow-lg">
-
-            R
-          </div>
-
-          <span className="text-xl font-bold tracking-wide">
-            Roadmap AI
-          </span>
-        </div>
+        
+             <Link
+                         to="/"
+                         data-aos="zoom-in"
+                         className="mb-10 flex items-center gap-3"
+                       >
+         <div className="z-10 flex items-center gap-3">
+       
+                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl font-bold text-[#5C45FD] shadow-lg">
+       
+                     R
+                   </div>
+       
+                   <span className="text-xl font-bold tracking-wide">
+                     Roadmap AI
+                   </span>
+                 </div>
+                       </Link>
 
         {/* TEXT */}
         <div
@@ -229,85 +236,233 @@ export default function SignupPage() {
           </div>
 
           {/* FORM */}
-          <form
-            data-aos="fade-up"
-            data-aos-delay="500"
-            className="mt-10 space-y-5"
-            onSubmit={handleSignup}
-          >
+     {/* FORM */}
+<form
+  data-aos="fade-up"
+  data-aos-delay="500"
+  className="mt-10 space-y-5"
+  onSubmit={handleSignup}
+>
 
-            {/* NAME */}
-            <div>
+  {/* NAME */}
+  <div>
 
-              <label className="mb-2 block font-medium text-gray-700">
+    <label className="mb-2 block font-medium text-gray-700">
 
-                Full Name
-              </label>
+      Full Name
+    </label>
 
-              <input
-                type="text"
-                value={name}
-                onChange={(e) =>
-                  setName(
-                    e.target.value
-                  )
-                }
-                placeholder="Enter your name"
-                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
-              />
-            </div>
+    <input
+      type="text"
+      value={name}
+      onChange={(e) =>
+        setName(
+          e.target.value
+        )
+      }
+      placeholder="Enter your name"
+      className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
+    />
+  </div>
 
-            {/* EMAIL */}
-            <div>
+  {/* EMAIL */}
+  <div>
 
-              <label className="mb-2 block font-medium text-gray-700">
+    <label className="mb-2 block font-medium text-gray-700">
 
-                Email Address
-              </label>
+      Email Address
+    </label>
 
-              <input
-                type="email"
-                value={email}
-                onChange={(e) =>
-                  setEmail(
-                    e.target.value
-                  )
-                }
-                placeholder="Enter your email"
-                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
-              />
-            </div>
+    <input
+      type="email"
+      value={email}
+      onChange={(e) =>
+        setEmail(
+          e.target.value
+        )
+      }
+      placeholder="Enter your email"
+      className={`w-full rounded-2xl border px-5 py-4 outline-none transition focus:border-[#5C45FD] ${
+        emailError
+          ? 'border-red-500'
+          : 'border-gray-200'
+      }`}
+    />
 
-            {/* PASSWORD */}
-            <div>
+    {emailError && (
 
-              <label className="mb-2 block font-medium text-gray-700">
+      <p className="mt-2 text-sm text-red-500">
+        {emailError}
+      </p>
+    )}
+  </div>
 
-                Password
-              </label>
+  {/* PASSWORD */}
+  <div>
 
-              <input
-                type="password"
-                value={password}
-                onChange={(e) =>
-                  setPassword(
-                    e.target.value
-                  )
-                }
-                placeholder="Enter password"
-                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
-              />
-            </div>
+    <label className="mb-2 block font-medium text-gray-700">
 
-            {/* BUTTON */}
-            <button
-              type="submit"
-              className="w-full rounded-2xl bg-gradient-to-r from-[#5C45FD] to-[#7B61FF] py-4 text-lg font-semibold text-white shadow-lg transition hover:scale-[1.02]"
-            >
+      Password
+    </label>
 
-              Create Account
-            </button>
-          </form>
+    <div className="relative">
+
+      <input
+        type={
+          showPassword
+            ? 'text'
+            : 'password'
+        }
+        value={password}
+        onChange={(e) => {
+
+          setPassword(
+            e.target.value
+          );
+
+          if (
+            e.target.value.length < 6
+          ) {
+
+            setPasswordError(
+              'Password must be at least 6 characters'
+            );
+
+          } else {
+
+            setPasswordError('');
+          }
+        }}
+        placeholder="Enter password"
+        className={`w-full rounded-2xl border px-5 py-4 pr-14 outline-none transition focus:border-[#5C45FD] ${
+          passwordError
+            ? 'border-red-500'
+            : 'border-gray-200'
+        }`}
+      />
+
+      <button
+        type="button"
+        onClick={() =>
+          setShowPassword(
+            !showPassword
+          )
+        }
+        className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"
+      >
+
+        {showPassword ? (
+          <EyeOff size={20} />
+        ) : (
+          <Eye size={20} />
+        )}
+      </button>
+    </div>
+
+    {passwordError && (
+
+      <p className="mt-2 text-sm text-red-500">
+        {passwordError}
+      </p>
+    )}
+  </div>
+
+  {/* CONFIRM PASSWORD */}
+  <div>
+
+    <label className="mb-2 block font-medium text-gray-700">
+
+      Confirm Password
+    </label>
+
+    <div className="relative">
+
+      <input
+        type={
+          showConfirmPassword
+            ? 'text'
+            : 'password'
+        }
+        value={confirmPassword}
+        onChange={(e) => {
+
+          setConfirmPassword(
+            e.target.value
+          );
+
+          if (
+            e.target.value !==
+            password
+          ) {
+
+            setConfirmPasswordError(
+              'Passwords do not match'
+            );
+
+          } else {
+
+            setConfirmPasswordError(
+              ''
+            );
+          }
+        }}
+        placeholder="Confirm password"
+        className={`w-full rounded-2xl border px-5 py-4 pr-14 outline-none transition focus:border-[#5C45FD] ${
+          confirmPasswordError
+            ? 'border-red-500'
+            : 'border-gray-200'
+        }`}
+      />
+
+      <button
+        type="button"
+        onClick={() =>
+          setShowConfirmPassword(
+            !showConfirmPassword
+          )
+        }
+        className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"
+      >
+
+        {showConfirmPassword ? (
+          <EyeOff size={20} />
+        ) : (
+          <Eye size={20} />
+        )}
+      </button>
+    </div>
+
+    {confirmPasswordError && (
+
+      <p className="mt-2 text-sm text-red-500">
+        {confirmPasswordError}
+      </p>
+    )}
+  </div>
+
+  {/* BUTTON */}
+  <button
+    type="submit"
+    className="w-full rounded-2xl bg-gradient-to-r from-[#5C45FD] to-[#7B61FF] py-4 text-lg font-semibold text-white shadow-lg transition hover:scale-[1.02]"
+  >
+
+    Create Account
+  </button>
+
+  {/* LOGIN LINK */}
+  <p className="text-center text-gray-500">
+
+    Already have an account?{' '}
+
+    <Link
+      to="/login"
+      className="font-semibold text-[#5C45FD] transition hover:underline"
+    >
+
+      Login
+    </Link>
+  </p>
+</form>
 
           {/* SOCIAL */}
           <div

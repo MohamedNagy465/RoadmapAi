@@ -162,9 +162,12 @@ export default function LoginPage() {
           data-aos="fade-right"
           className="relative hidden flex-col overflow-hidden bg-gradient-to-br from-[#5C45FD] via-[#4F3EEA] to-[#3727B3] p-10 text-white md:flex"
         >
-
-          {/* LOGO */}
-          <div className="z-10 flex items-center gap-3">
+            <Link
+                  to="/"
+                  data-aos="zoom-in"
+                  className="mb-10 flex items-center gap-3"
+                >
+  <div className="z-10 flex items-center gap-3">
 
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl font-bold text-[#5C45FD] shadow-lg">
 
@@ -175,6 +178,9 @@ export default function LoginPage() {
               Roadmap AI
             </span>
           </div>
+                </Link>
+          {/* LOGO */}
+        
 
           {/* TEXT */}
           <div className="z-10 mt-20">
