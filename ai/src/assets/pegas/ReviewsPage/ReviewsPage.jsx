@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+} from 'react';
 
 import {
   Star,
@@ -8,14 +10,19 @@ export default function ReviewsPage() {
 
   /* User */
   const user =
-    JSON.parse(localStorage.getItem('user')) ||
-    {};
+    JSON.parse(
+      localStorage.getItem(
+        'user'
+      )
+    ) || {};
 
   /* Reviews State */
-  const [reviews, setReviews] =
+  const [reviews,
+    setReviews] =
     useState([
       {
-        name: 'Neama Mohamed',
+        name:
+          'Neama Mohamed',
 
         image:
           'https://i.pravatar.cc/100?img=5',
@@ -32,7 +39,8 @@ export default function ReviewsPage() {
       },
 
       {
-        name: 'Ahmed Tarek',
+        name:
+          'Ahmed Tarek',
 
         image:
           'https://i.pravatar.cc/100?img=12',
@@ -49,7 +57,8 @@ export default function ReviewsPage() {
       },
 
       {
-        name: 'Sara Ali',
+        name:
+          'Sara Ali',
 
         image:
           'https://i.pravatar.cc/100?img=20',
@@ -67,88 +76,128 @@ export default function ReviewsPage() {
     ]);
 
   /* Add Review States */
-  const [reviewText, setReviewText] =
+  const [reviewText,
+    setReviewText] =
     useState('');
 
-  const [rating, setRating] =
+  const [rating,
+    setRating] =
     useState(5);
 
-  const [courseName, setCourseName] =
+  const [courseName,
+    setCourseName] =
     useState('');
 
   /* Add Review */
-  const handleAddReview = () => {
+  const handleAddReview =
+    () => {
 
-    if (
-      !reviewText.trim() ||
-      !courseName.trim()
-    )
-      return;
+      if (
+        !reviewText.trim() ||
+        !courseName.trim()
+      )
+        return;
 
-    const newReview = {
+      const newReview = {
 
-      name:
-        user?.name || 'You',
+        name:
+          user?.name ||
+          'You',
 
-      image:
-        user?.profileImage ||
-        'https://i.pravatar.cc/100?img=15',
+        image:
+          user?.profileImage ||
+          'https://i.pravatar.cc/100?img=15',
 
-      review: reviewText,
+        review:
+          reviewText,
 
-      rating,
+        rating,
 
-      course:
-        courseName ||
-        'Unknown Course',
+        course:
+          courseName ||
+          'Unknown Course',
 
-      time: 'Now',
+        time: 'Now',
+      };
+
+      setReviews([
+        newReview,
+        ...reviews,
+      ]);
+
+      setReviewText('');
+      setRating(5);
+      setCourseName('');
     };
-
-    setReviews([
-      newReview,
-      ...reviews,
-    ]);
-
-    setReviewText('');
-    setRating(5);
-    setCourseName('');
-  };
 
   /* Stats */
   const stats = [
-    { star: 5, value: '79%' },
-    { star: 4, value: '14%' },
-    { star: 3, value: '5%' },
-    { star: 2, value: '1%' },
-    { star: 1, value: '1%' },
+    {
+      star: 5,
+      value: '79%',
+    },
+
+    {
+      star: 4,
+      value: '14%',
+    },
+
+    {
+      star: 3,
+      value: '5%',
+    },
+
+    {
+      star: 2,
+      value: '1%',
+    },
+
+    {
+      star: 1,
+      value: '1%',
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA]">
+    <div className="min-h-screen overflow-x-hidden bg-[#F5F6FA]">
 
-      <div className="min-h-screen bg-white rounded-[32px] border border-gray-200 shadow-xl overflow-hidden">
+      <div
+        data-aos="zoom-in"
+        className="min-h-screen overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-xl"
+      >
 
         {/* Header */}
-        <div className="p-6 md:p-8 border-b border-gray-100">
+        <div
+          data-aos="fade-down"
+          className="border-b border-gray-100 p-6 md:p-8"
+        >
 
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 
             {/* Course */}
-            <div className="flex items-center gap-5">
+            <div
+              data-aos="fade-right"
+              data-aos-delay="200"
+              className="flex items-center gap-5"
+            >
 
-              <div className="w-20 h-20 rounded-3xl bg-indigo-100 flex items-center justify-center text-[#5C45FD] text-3xl shadow-sm">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-indigo-100 text-3xl text-[#5C45FD] shadow-sm">
+
                 ⚛️
               </div>
 
               <div>
 
                 <h1 className="text-2xl font-bold text-gray-900">
+
                   Course Reviews
                 </h1>
 
                 <p className="mt-1 text-gray-400">
-                  Share your learning experience ⭐
+
+                  Share your
+                  learning
+                  experience ⭐
                 </p>
 
                 <div className="mt-3 flex items-center gap-3">
@@ -182,27 +231,40 @@ export default function ReviewsPage() {
                   </div>
 
                   <span className="font-bold text-orange-500">
+
                     4.6
                   </span>
 
                   <span className="text-gray-400">
-                    ({reviews.length} reviews)
+
+                    (
+                    {
+                      reviews.length
+                    }{' '}
+                    reviews)
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Add Review */}
-            <div className="w-full lg:max-w-md space-y-4">
+            <div
+              data-aos="fade-left"
+              data-aos-delay="300"
+              className="w-full space-y-4 lg:max-w-md"
+            >
 
               {/* Course Name */}
               <input
                 type="text"
                 placeholder="Course name..."
-                value={courseName}
+                value={
+                  courseName
+                }
                 onChange={(e) =>
                   setCourseName(
-                    e.target.value
+                    e.target
+                      .value
                   )
                 }
                 className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none focus:border-[#5C45FD]"
@@ -212,19 +274,23 @@ export default function ReviewsPage() {
               <textarea
                 rows="4"
                 placeholder="Write your review..."
-                value={reviewText}
+                value={
+                  reviewText
+                }
                 onChange={(e) =>
                   setReviewText(
-                    e.target.value
+                    e.target
+                      .value
                   )
                 }
-                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none resize-none focus:border-[#5C45FD]"
+                className="w-full resize-none rounded-2xl border border-gray-200 px-5 py-4 outline-none focus:border-[#5C45FD]"
               />
 
               {/* Rating */}
               <div className="flex items-center gap-3">
 
                 <span className="font-semibold text-gray-700">
+
                   Rating:
                 </span>
 
@@ -233,7 +299,8 @@ export default function ReviewsPage() {
                   onChange={(e) =>
                     setRating(
                       Number(
-                        e.target.value
+                        e.target
+                          .value
                       )
                     )
                   }
@@ -265,8 +332,9 @@ export default function ReviewsPage() {
                   onClick={
                     handleAddReview
                   }
-                  className="ml-auto px-5 py-2 rounded-xl bg-[#5C45FD] text-white font-semibold hover:bg-[#4A38E0] transition"
+                  className="ml-auto rounded-xl bg-[#5C45FD] px-5 py-2 font-semibold text-white transition hover:bg-[#4A38E0]"
                 >
+
                   Submit
                 </button>
               </div>
@@ -278,9 +346,14 @@ export default function ReviewsPage() {
         <div className="grid grid-cols-1 xl:grid-cols-3">
 
           {/* Reviews */}
-          <div className="xl:col-span-2 p-6 md:p-8 border-r border-gray-100">
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
+            className="border-r border-gray-100 p-6 md:p-8 xl:col-span-2"
+          >
 
             <h2 className="text-xl font-bold text-gray-900">
+
               Reviews
             </h2>
 
@@ -291,32 +364,39 @@ export default function ReviewsPage() {
                   review,
                   index
                 ) => (
+
                   <div
+                    data-aos="fade-right"
+                    data-aos-delay={index * 100}
                     key={index}
                     className="flex items-start gap-4"
                   >
 
                     <img
-                      src={review.image}
+                      src={
+                        review.image
+                      }
                       alt={
                         review.name
                       }
-                      className="w-14 h-14 rounded-2xl object-cover"
+                      className="h-14 w-14 rounded-2xl object-cover"
                     />
 
                     <div className="flex-1">
 
-                      <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
 
                         <div>
 
                           <h3 className="font-bold text-gray-900">
+
                             {
                               review.name
                             }
                           </h3>
 
-                          <p className="text-sm text-[#5C45FD] font-medium mt-1">
+                          <p className="mt-1 text-sm font-medium text-[#5C45FD]">
+
                             {
                               review.course
                             }
@@ -335,6 +415,7 @@ export default function ReviewsPage() {
                                   _,
                                   i
                                 ) => (
+
                                   <Star
                                     key={
                                       i
@@ -349,6 +430,7 @@ export default function ReviewsPage() {
                             </div>
 
                             <span className="text-sm text-gray-400">
+
                               {
                                 review.rating
                               }
@@ -358,13 +440,15 @@ export default function ReviewsPage() {
                         </div>
 
                         <span className="text-sm text-gray-400">
+
                           {
                             review.time
                           }
                         </span>
                       </div>
 
-                      <p className="mt-3 text-gray-500 leading-7">
+                      <p className="mt-3 leading-7 text-gray-500">
+
                         {
                           review.review
                         }
@@ -377,11 +461,16 @@ export default function ReviewsPage() {
           </div>
 
           {/* Rating Summary */}
-          <div className="p-6 md:p-8">
+          <div
+            data-aos="fade-left"
+            data-aos-delay="500"
+            className="p-6 md:p-8"
+          >
 
             <div className="flex flex-col items-center">
 
               <h2 className="text-6xl font-bold text-gray-900">
+
                 4.6
               </h2>
 
@@ -414,7 +503,10 @@ export default function ReviewsPage() {
               </div>
 
               <p className="mt-3 text-gray-400">
-                {reviews.length}{' '}
+
+                {
+                  reviews.length
+                }{' '}
                 reviews
               </p>
             </div>
@@ -427,12 +519,16 @@ export default function ReviewsPage() {
                   item,
                   index
                 ) => (
+
                   <div
+                    data-aos="fade-left"
+                    data-aos-delay={index * 100}
                     key={index}
                     className="flex items-center gap-3"
                   >
 
                     <span className="w-5 text-sm font-semibold text-gray-700">
+
                       {
                         item.star
                       }
@@ -444,10 +540,10 @@ export default function ReviewsPage() {
                       className="text-yellow-400"
                     />
 
-                    <div className="flex-1 h-2 rounded-full bg-gray-100 overflow-hidden">
+                    <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100">
 
                       <div
-                        className="h-full bg-[#5C45FD] rounded-full"
+                        className="h-full rounded-full bg-[#5C45FD]"
                         style={{
                           width:
                             item.value,
@@ -455,7 +551,8 @@ export default function ReviewsPage() {
                       />
                     </div>
 
-                    <span className="text-sm text-gray-500 w-10 text-right">
+                    <span className="w-10 text-right text-sm text-gray-500">
+
                       {
                         item.value
                       }
@@ -466,7 +563,6 @@ export default function ReviewsPage() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

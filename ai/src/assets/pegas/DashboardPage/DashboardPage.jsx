@@ -1,7 +1,10 @@
 import React from 'react';
 
 import {
-  Bell,
+  useNavigate,
+} from 'react-router-dom';
+
+import {
   BookOpen,
   Clock3,
   Target,
@@ -11,35 +14,48 @@ import {
 
 export default function DashboardPage() {
 
-  /* User */
+  /* USER */
   const user =
-    JSON.parse(localStorage.getItem('user')) ||
-    {};
+    JSON.parse(
+      localStorage.getItem(
+        'user'
+      )
+    ) || {};
+
+  /* NAVIGATE */
+  const navigate =
+    useNavigate();
 
   return (
     <div className="min-h-screen bg-[#F5F6FA]">
 
-      <div className="min-h-screen bg-white rounded-[32px] border border-gray-200 shadow-xl p-6 md:p-8">
+      <div
+        data-aos="fade-up"
+        className="min-h-screen rounded-[32px] border border-gray-200 bg-white p-6 shadow-xl md:p-8"
+      >
 
-        {/* Header */}
-        <div className="flex items-center justify-between flex-wrap gap-5">
+        {/* HEADER */}
+        <div
+          data-aos="fade-down"
+          className="flex flex-wrap items-center justify-between gap-5"
+        >
 
           <div>
 
             <h1 className="text-3xl font-bold text-gray-900">
-              Welcome back, {user?.name || 'User'}! 👋
+              Welcome back,{' '}
+              {user?.name ||
+                'User'}
+              ! 👋
             </h1>
 
             <p className="mt-2 text-gray-400">
-              Let’s continue your learning journey.
+              Let’s continue your
+              learning journey.
             </p>
           </div>
 
           <div className="flex items-center gap-5">
-
-            <button className="w-12 h-12 rounded-2xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition">
-              <Bell size={20} />
-            </button>
 
             <img
               src={
@@ -47,16 +63,20 @@ export default function DashboardPage() {
                 'https://i.pravatar.cc/100'
               }
               alt="profile"
-              className="w-12 h-12 rounded-2xl object-cover"
+              className="h-12 w-12 rounded-2xl object-cover"
             />
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-10">
+        {/* STATS */}
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="200"
+          className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4"
+        >
 
-          {/* Progress */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm">
+          {/* PROGRESS */}
+          <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <h3 className="text-sm font-semibold text-gray-500">
               Overall Progress
@@ -64,9 +84,9 @@ export default function DashboardPage() {
 
             <div className="mt-6 flex flex-col items-center">
 
-              <div className="relative w-36 h-36">
+              <div className="relative h-36 w-36">
 
-                <svg className="w-36 h-36 rotate-[-90deg]">
+                <svg className="h-36 w-36 rotate-[-90deg]">
 
                   <circle
                     cx="72"
@@ -96,16 +116,17 @@ export default function DashboardPage() {
                     65%
                   </span>
 
-                  <span className="text-xs text-gray-400 mt-1">
-                    You’re doing great!
+                  <span className="mt-1 text-xs text-gray-400">
+                    You’re doing
+                    great!
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Completed */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm flex flex-col justify-between">
+          {/* COMPLETED */}
+          <div className="flex flex-col justify-between rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <div>
 
@@ -122,14 +143,16 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="mt-6 w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-green-600">
+            <div className="mt-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-green-600">
 
-              <CheckCircle2 size={24} />
+              <CheckCircle2
+                size={24}
+              />
             </div>
           </div>
 
-          {/* In Progress */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm flex flex-col justify-between">
+          {/* IN PROGRESS */}
+          <div className="flex flex-col justify-between rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <div>
 
@@ -146,14 +169,16 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="mt-6 w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600">
+            <div className="mt-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-600">
 
-              <Clock3 size={24} />
+              <Clock3
+                size={24}
+              />
             </div>
           </div>
 
-          {/* Remaining */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm flex flex-col justify-between">
+          {/* REMAINING */}
+          <div className="flex flex-col justify-between rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <div>
 
@@ -170,22 +195,26 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="mt-6 w-14 h-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600">
+            <div className="mt-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-100 text-pink-600">
 
               <Target size={24} />
             </div>
           </div>
         </div>
 
-        {/* Current Track */}
-        <div className="mt-8 bg-gradient-to-r from-[#F3F0FF] to-[#ECE8FF] rounded-[28px] p-6 border border-indigo-100">
+        {/* CURRENT TRACK */}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="mt-8 rounded-[28px] border border-indigo-100 bg-gradient-to-r from-[#F3F0FF] to-[#ECE8FF] p-6"
+        >
 
-          <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-8">
+          <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
 
-            {/* Left */}
+            {/* LEFT */}
             <div className="flex-1">
 
-              <span className="text-sm text-gray-500 font-medium">
+              <span className="text-sm font-medium text-gray-500">
                 Current Track
               </span>
 
@@ -197,12 +226,12 @@ export default function DashboardPage() {
                 Resume learning
               </p>
 
-              {/* Progress */}
+              {/* PROGRESS */}
               <div className="mt-6 flex items-center gap-4">
 
-                <div className="flex-1 h-3 rounded-full bg-white overflow-hidden">
+                <div className="h-3 flex-1 overflow-hidden rounded-full bg-white">
 
-                  <div className="w-[65%] h-full bg-[#5C45FD] rounded-full" />
+                  <div className="h-full w-[65%] rounded-full bg-[#5C45FD]" />
                 </div>
 
                 <span className="text-sm font-semibold text-gray-700">
@@ -211,7 +240,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Right */}
+            {/* RIGHT */}
             <div className="flex flex-col items-center">
 
               <img
@@ -220,18 +249,30 @@ export default function DashboardPage() {
                 className="w-36"
               />
 
-              <button className="mt-5 px-7 py-3 rounded-2xl bg-[#5C45FD] text-white font-semibold shadow-lg shadow-indigo-100 hover:bg-[#4A38E0] transition">
+              <button
+                onClick={() =>
+                  navigate(
+                    '/roadmap?track=web-development'
+                  )
+                }
+                className="mt-5 rounded-2xl bg-[#5C45FD] px-7 py-3 font-semibold text-white shadow-lg shadow-indigo-100 transition hover:-translate-y-1 hover:bg-[#4A38E0]"
+              >
+
                 Continue Roadmap →
               </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Cards */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+        {/* BOTTOM */}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="400"
+          className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-2"
+        >
 
-          {/* Activity */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm">
+          {/* ACTIVITY */}
+          <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <h3 className="text-xl font-bold text-gray-900">
               Recent Activity
@@ -265,8 +306,8 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Next Up */}
-          <div className="bg-white border border-gray-200 rounded-[28px] p-6 shadow-sm">
+          {/* NEXT UP */}
+          <div className="rounded-[28px] border border-gray-200 bg-white p-6 shadow-sm">
 
             <h3 className="text-xl font-bold text-gray-900">
               Next Up
@@ -276,9 +317,11 @@ export default function DashboardPage() {
 
               <div className="flex items-start gap-4">
 
-                <div className="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-yellow-600">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-yellow-100 text-yellow-600">
 
-                  <BookOpen size={26} />
+                  <BookOpen
+                    size={26}
+                  />
                 </div>
 
                 <div>
@@ -288,25 +331,35 @@ export default function DashboardPage() {
                   </h4>
 
                   <p className="mt-2 text-gray-500">
-                    Learn the fundamentals of JavaScript.
+                    Learn the
+                    fundamentals of
+                    JavaScript.
                   </p>
                 </div>
               </div>
 
-              <button className="w-14 h-14 rounded-2xl bg-[#5C45FD] text-white flex items-center justify-center shadow-lg shadow-indigo-100 hover:bg-[#4A38E0] transition">
+              <button
+                onClick={() =>
+                  navigate(
+                    '/course-player'
+                  )
+                }
+                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#5C45FD] text-white shadow-lg shadow-indigo-100 transition hover:bg-[#4A38E0]"
+              >
 
-                <PlayCircle size={24} />
+                <PlayCircle
+                  size={24}
+                />
               </button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
-/* Activity Item */
+/* ACTIVITY ITEM */
 function ActivityItem({
   title,
   time,
@@ -314,22 +367,27 @@ function ActivityItem({
 }) {
 
   const colors = {
-    green: 'bg-green-500',
+    green:
+      'bg-green-500',
     blue: 'bg-blue-500',
-    purple: 'bg-purple-500',
+    purple:
+      'bg-purple-500',
     pink: 'bg-pink-500',
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div
+      data-aos="fade-right"
+      className="flex items-center justify-between"
+    >
 
       <div className="flex items-center gap-3">
 
         <div
-          className={`w-3 h-3 rounded-full ${colors[color]}`}
+          className={`h-3 w-3 rounded-full ${colors[color]}`}
         />
 
-        <span className="text-gray-700 font-medium">
+        <span className="font-medium text-gray-700">
           {title}
         </span>
       </div>

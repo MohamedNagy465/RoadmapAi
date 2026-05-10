@@ -1,10 +1,6 @@
 import React from 'react';
 
 import {
-  ArrowLeft,
-  Bell,
-  Settings,
-  Search,
   PlayCircle,
   CheckCircle2,
   ChevronDown,
@@ -18,37 +14,45 @@ import {
 export default function CoursePlayerPage() {
 
   const user =
-    JSON.parse(localStorage.getItem('user')) ||
-    {};
+    JSON.parse(
+      localStorage.getItem(
+        'user'
+      )
+    ) || {};
 
   const lessons = [
     {
-      title: 'Introduction to React',
+      title:
+        'Introduction to React',
       time: '15:45',
       done: true,
       active: true,
     },
 
     {
-      title: 'Setting Up the Environment',
+      title:
+        'Setting Up the Environment',
       time: '12:30',
       done: true,
     },
 
     {
-      title: 'JSX Explained',
+      title:
+        'JSX Explained',
       time: '18:20',
       done: true,
     },
 
     {
-      title: 'Components and Props',
+      title:
+        'Components and Props',
       time: '20:15',
       done: true,
     },
 
     {
-      title: 'Mini Project: Your First App',
+      title:
+        'Mini Project: Your First App',
       time: '25:10',
       done: true,
     },
@@ -57,64 +61,44 @@ export default function CoursePlayerPage() {
   return (
     <div className="min-h-screen bg-[#F5F6FA] p-6">
 
-      {/* Header */}
-      <div className="flex items-center justify-between flex-wrap gap-5">
+      {/* CONTENT */}
+      <div
+        data-aos="fade-up"
+        className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3"
+      >
 
-        {/* Left */}
-       
+        {/* LEFT */}
+        <div className="space-y-6 xl:col-span-2">
 
-        {/* Right */}
-   
-      </div>
+          {/* VIDEO */}
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="200"
+            className="overflow-hidden rounded-[32px] bg-black shadow-xl"
+          >
 
-      {/* Content */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">
+            <video
+              controls
+              autoPlay
+              className="h-[520px] w-full object-cover"
+              poster="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+            >
 
-        {/* Left Side */}
-        <div className="xl:col-span-2 space-y-6">
+              <source
+                src="/videos/react-course.mp4"
+                type="video/mp4"
+              />
 
-          {/* Video */}
-          <div className="bg-black rounded-[32px] overflow-hidden relative">
-
-            <img
-              src="https://images.unsplash.com/photo-1573496773905-f5b17e717f05?q=80&w=1200&auto=format&fit=crop"
-              alt="video"
-              className="w-full h-[520px] object-cover opacity-90"
-            />
-
-            {/* Controls */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-
-              {/* Progress */}
-              <div className="w-full h-1 rounded-full bg-white/20 overflow-hidden">
-
-                <div className="w-[35%] h-full bg-[#5C45FD]" />
-              </div>
-
-              {/* Bottom */}
-              <div className="flex items-center justify-between mt-5 text-white">
-
-                <div className="flex items-center gap-5">
-
-                  <PlayCircle size={28} />
-
-                  <span className="font-medium">
-                    04:32 / 15:45
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-5">
-
-                  <Settings size={22} />
-
-                  <Bookmark size={22} />
-                </div>
-              </div>
-            </div>
+              Your browser does not support the video tag.
+            </video>
           </div>
 
-          {/* Lesson */}
-          <div className="bg-white rounded-[32px] border border-gray-200 shadow-sm overflow-hidden">
+          {/* LESSON */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-sm"
+          >
 
             <div className="p-8">
 
@@ -126,9 +110,12 @@ export default function CoursePlayerPage() {
                     1. Introduction to React
                   </h2>
 
-                  <p className="mt-5 text-lg text-gray-500 leading-8">
-                    In this lesson, we'll learn what React is,
-                    why it's so popular, and how it works.
+                  <p className="mt-5 text-lg leading-8 text-gray-500">
+                    In this lesson,
+                    we'll learn what
+                    React is, why it's
+                    so popular, and how
+                    it works.
                   </p>
                 </div>
 
@@ -138,8 +125,8 @@ export default function CoursePlayerPage() {
                 />
               </div>
 
-              {/* Info */}
-              <div className="flex flex-wrap items-center gap-8 mt-8 text-gray-500">
+              {/* INFO */}
+              <div className="mt-8 flex flex-wrap items-center gap-8 text-gray-500">
 
                 <div className="flex items-center gap-2">
 
@@ -150,7 +137,9 @@ export default function CoursePlayerPage() {
 
                 <div className="flex items-center gap-2">
 
-                  <CheckCircle2 size={18} />
+                  <CheckCircle2
+                    size={18}
+                  />
 
                   Intermediate
                 </div>
@@ -164,50 +153,63 @@ export default function CoursePlayerPage() {
               </div>
             </div>
 
-            {/* Tabs */}
+            {/* TABS */}
             <div className="border-t border-gray-100 px-8">
 
               <div className="flex items-center gap-10 overflow-x-auto">
 
-                <button className="py-5 border-b-2 border-[#5C45FD] text-[#5C45FD] font-semibold whitespace-nowrap">
+                <button className="whitespace-nowrap border-b-2 border-[#5C45FD] py-5 font-semibold text-[#5C45FD]">
+
                   Overview
                 </button>
 
-                <button className="py-5 text-gray-500 whitespace-nowrap">
+                <button className="whitespace-nowrap py-5 text-gray-500">
+
                   Resources
                 </button>
 
-                <button className="py-5 text-gray-500 whitespace-nowrap">
+                <button className="whitespace-nowrap py-5 text-gray-500">
+
                   Notes
                 </button>
 
-                <button className="py-5 text-gray-500 whitespace-nowrap">
+                <button className="whitespace-nowrap py-5 text-gray-500">
+
                   Discussions
                 </button>
               </div>
             </div>
 
-            {/* Overview */}
+            {/* OVERVIEW */}
             <div className="p-8">
 
               <h3 className="text-2xl font-bold text-gray-900">
+
                 About this lesson
               </h3>
 
-              <p className="mt-5 text-gray-500 leading-9 text-lg">
-                React is a JavaScript library for building user
-                interfaces. It allows us to create reusable UI
-                components and build single-page applications.
+              <p className="mt-5 text-lg leading-9 text-gray-500">
+
+                React is a
+                JavaScript library
+                for building user
+                interfaces. It
+                allows us to create
+                reusable UI
+                components and
+                build single-page
+                applications.
               </p>
 
-              {/* Learn */}
+              {/* LEARN */}
               <div className="mt-10">
 
                 <h3 className="text-2xl font-bold text-gray-900">
+
                   What you'll learn
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+                <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
 
                   {[
                     'What is React?',
@@ -215,63 +217,83 @@ export default function CoursePlayerPage() {
                     'Components and Props',
                     'React vs Other Libraries',
                     'Setting up the Environment',
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3"
-                    >
+                  ].map(
+                    (
+                      item,
+                      index
+                    ) => (
 
-                      <CheckCircle2
-                        size={20}
-                        className="text-green-500"
-                      />
+                      <div
+                        data-aos="fade-right"
+                        data-aos-delay={index * 100}
+                        key={index}
+                        className="flex items-center gap-3"
+                      >
 
-                      <span className="text-gray-700">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
+                        <CheckCircle2
+                          size={20}
+                          className="text-green-500"
+                        />
+
+                        <span className="text-gray-700">
+                          {item}
+                        </span>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="border-t border-gray-100 p-6 flex items-center justify-between flex-wrap gap-4">
+            {/* FOOTER */}
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 p-6">
 
-              <button className="px-6 py-3 rounded-2xl border border-gray-200 font-semibold text-gray-700 hover:bg-gray-50 transition">
+              <button className="rounded-2xl border border-gray-200 px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-50">
+
                 ← Previous Lesson
               </button>
 
-              <span className="text-gray-500 font-medium">
+              <span className="font-medium text-gray-500">
+
                 Lesson 1 of 23
               </span>
 
-              <button className="px-7 py-3 rounded-2xl bg-[#5C45FD] text-white font-semibold shadow-lg shadow-indigo-100 hover:bg-[#4A38E0] transition flex items-center gap-2">
+              <button className="flex items-center gap-2 rounded-2xl bg-[#5C45FD] px-7 py-3 font-semibold text-white shadow-lg shadow-indigo-100 transition hover:bg-[#4A38E0]">
 
                 Next Lesson
 
-                <ArrowRight size={18} />
+                <ArrowRight
+                  size={18}
+                />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right Side */}
-        <div className="space-y-6">
+        {/* RIGHT */}
+        <div
+          data-aos="fade-in"
+          data-aos-delay="400"
+          className="space-y-6"
+        >
 
-          {/* Progress */}
-          <div className="bg-white rounded-[32px] border border-gray-200 p-6 shadow-sm">
+          {/* PROGRESS */}
+          <div
+            data-aos="zoom-in-up"
+            className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-sm"
+          >
 
             <h3 className="text-2xl font-bold text-gray-900">
+
               Course Progress
             </h3>
 
-            <div className="flex items-center gap-5 mt-8">
+            <div className="mt-8 flex items-center gap-5">
 
-              {/* Circle */}
-              <div className="relative w-24 h-24">
+              {/* CIRCLE */}
+              <div className="relative h-24 w-24">
 
-                <svg className="w-24 h-24 rotate-[-90deg]">
+                <svg className="h-24 w-24 rotate-[-90deg]">
 
                   <circle
                     cx="48"
@@ -296,137 +318,175 @@ export default function CoursePlayerPage() {
                 </svg>
 
                 <div className="absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-900">
+
                   65%
                 </div>
               </div>
 
-              {/* Info */}
+              {/* INFO */}
               <div className="flex-1">
 
                 <h4 className="font-bold text-gray-900">
-                  15 of 23 lessons completed
+
+                  15 of 23 lessons
+                  completed
                 </h4>
 
-                <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-100">
 
-                  <div className="w-[65%] h-full bg-[#5C45FD]" />
+                  <div className="h-full w-[65%] bg-[#5C45FD]" />
                 </div>
 
                 <p className="mt-4 text-gray-400">
+
                   Estimated time left
                 </p>
 
                 <h5 className="mt-1 text-2xl font-bold text-gray-900">
+
                   12h 30m
                 </h5>
               </div>
             </div>
           </div>
 
-          {/* Course Content */}
-          <div className="bg-white rounded-[32px] border border-gray-200 p-6 shadow-sm">
+          {/* CONTENT */}
+          <div className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-sm">
 
-            {/* Tabs */}
+            {/* TABS */}
             <div className="flex items-center gap-10 border-b border-gray-100 pb-5">
 
-              <button className="text-[#5C45FD] border-b-2 border-[#5C45FD] pb-4 font-semibold">
+              <button className="border-b-2 border-[#5C45FD] pb-4 font-semibold text-[#5C45FD]">
+
                 Course Content
               </button>
 
-              <button className="text-gray-400 font-semibold">
+              <button className="font-semibold text-gray-400">
+
                 Instructor
               </button>
             </div>
 
-            {/* Section */}
-            <div className="mt-6 border border-gray-100 rounded-2xl overflow-hidden">
+            {/* SECTION */}
+            <div className="mt-6 overflow-hidden rounded-2xl border border-gray-100">
 
-              <div className="flex items-center justify-between px-5 py-4 bg-gray-50">
+              <div className="flex items-center justify-between bg-gray-50 px-5 py-4">
 
                 <h3 className="font-bold text-gray-900">
-                  Section 1: Getting Started
+
+                  Section 1:
+                  Getting Started
                 </h3>
 
                 <span className="font-semibold text-gray-500">
+
                   5 / 5
                 </span>
               </div>
 
-              {/* Lessons */}
+              {/* LESSONS */}
               <div className="divide-y divide-gray-100">
 
-                {lessons.map((lesson, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center justify-between px-5 py-4 ${
-                      lesson.active
-                        ? 'bg-[#F5F3FF]'
-                        : 'bg-white'
-                    }`}
-                  >
+                {lessons.map(
+                  (
+                    lesson,
+                    index
+                  ) => (
 
-                    <div className="flex items-center gap-4">
+                    <div
+                      data-aos="fade-right"
+                      data-aos-delay={index * 100}
+                      key={index}
+                      className={`flex items-center justify-between px-5 py-4 ${
+                        lesson.active
+                          ? 'bg-[#F5F3FF]'
+                          : 'bg-white'
+                      }`}
+                    >
 
-                      <PlayCircle
-                        size={18}
-                        className={
-                          lesson.active
-                            ? 'text-[#5C45FD]'
-                            : 'text-gray-400'
-                        }
-                      />
+                      <div className="flex items-center gap-4">
 
-                      <span className="font-medium text-gray-800">
-                        {index + 1}. {lesson.title}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-
-                      <span className="text-sm text-gray-400">
-                        {lesson.time}
-                      </span>
-
-                      {lesson.done && (
-                        <CheckCircle2
+                        <PlayCircle
                           size={18}
-                          className="text-green-500"
+                          className={
+                            lesson.active
+                              ? 'text-[#5C45FD]'
+                              : 'text-gray-400'
+                          }
                         />
-                      )}
+
+                        <span className="font-medium text-gray-800">
+
+                          {index + 1}.{' '}
+                          {
+                            lesson.title
+                          }
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+
+                        <span className="text-sm text-gray-400">
+
+                          {
+                            lesson.time
+                          }
+                        </span>
+
+                        {lesson.done && (
+
+                          <CheckCircle2
+                            size={18}
+                            className="text-green-500"
+                          />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </div>
 
-            {/* Other Sections */}
+            {/* OTHER */}
             {[
               'Section 2: Core Concepts',
               'Section 3: State & Events',
               'Section 4: Hooks',
               'Section 5: Routing',
-            ].map((section, index) => (
-              <div
-                key={index}
-                className="mt-4 border border-gray-100 rounded-2xl px-5 py-4 flex items-center justify-between"
-              >
+            ].map(
+              (
+                section,
+                index
+              ) => (
 
-                <span className="font-semibold text-gray-700">
-                  {section}
-                </span>
+                <div
+                  key={index}
+                  className="mt-4 flex items-center justify-between rounded-2xl border border-gray-100 px-5 py-4"
+                >
 
-                <ChevronDown
-                  size={18}
-                  className="text-gray-400"
-                />
-              </div>
-            ))}
+                  <span className="font-semibold text-gray-700">
+
+                    {section}
+                  </span>
+
+                  <ChevronDown
+                    size={18}
+                    className="text-gray-400"
+                  />
+                </div>
+              )
+            )}
           </div>
 
-          {/* Downloads */}
-          <div className="bg-white rounded-[32px] border border-gray-200 p-6 shadow-sm">
+          {/* DOWNLOADS */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="500"
+            className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-sm"
+          >
 
             <h3 className="text-2xl font-bold text-gray-900">
+
               Download Resources
             </h3>
 
@@ -436,29 +496,37 @@ export default function CoursePlayerPage() {
                 'Course Slides.pdf',
                 'Code Examples.zip',
                 'Cheat Sheet.pdf',
-              ].map((file, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between border border-gray-100 rounded-2xl px-5 py-4"
-                >
+              ].map(
+                (
+                  file,
+                  index
+                ) => (
 
-                  <div className="flex items-center gap-4">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between rounded-2xl border border-gray-100 px-5 py-4"
+                  >
 
-                    <Download
-                      size={20}
-                      className="text-[#5C45FD]"
-                    />
+                    <div className="flex items-center gap-4">
 
-                    <span className="font-medium text-gray-700">
-                      {file}
-                    </span>
+                      <Download
+                        size={20}
+                        className="text-[#5C45FD]"
+                      />
+
+                      <span className="font-medium text-gray-700">
+
+                        {file}
+                      </span>
+                    </div>
+
+                    <button className="font-semibold text-[#5C45FD] hover:underline">
+
+                      Download
+                    </button>
                   </div>
-
-                  <button className="text-[#5C45FD] font-semibold hover:underline">
-                    Download
-                  </button>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </div>

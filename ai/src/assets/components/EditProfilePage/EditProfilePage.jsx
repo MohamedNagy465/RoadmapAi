@@ -1,24 +1,50 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+} from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 import {
   FaGithub,
   FaLinkedin,
+  FaHtml5,
+  FaCss3Alt,
+  FaReact,
+  FaNodeJs,
 } from 'react-icons/fa';
 
-import { IoLocationSharp } from 'react-icons/io5';
+import {
+  SiJavascript,
+  SiTailwindcss,
+  SiExpress,
+  SiMongodb,
+  SiTypescript,
+  SiNextdotjs,
+} from 'react-icons/si';
+
+import {
+  Save,
+  X,
+} from 'lucide-react';
 
 import toast from 'react-hot-toast';
 
 export default function EditProfilePage() {
 
-  /* Get User */
-  const user =
-    JSON.parse(localStorage.getItem('user')) ||
-    {};
+  const navigate =
+    useNavigate();
 
-  /* States */
+  /* USER */
+  const user =
+    JSON.parse(
+      localStorage.getItem('user')
+    ) || {};
+
+  /* STATES */
   const [fullName, setFullName] =
-    useState(user?.name || '');
+    useState(
+      user?.name || ''
+    );
 
   const [headline, setHeadline] =
     useState(
@@ -28,29 +54,150 @@ export default function EditProfilePage() {
 
   const [location, setLocation] =
     useState(
-      user?.location || 'Cairo, Egypt'
+      user?.location ||
+        'Cairo, Egypt'
+    );
+
+  const [email, setEmail] =
+    useState(
+      user?.email || ''
+    );
+
+  const [phone, setPhone] =
+    useState(
+      user?.phone || ''
+    );
+
+  const [website, setWebsite] =
+    useState(
+      user?.website || ''
     );
 
   const [github, setGithub] =
-    useState(user?.github || '');
+    useState(
+      user?.github || ''
+    );
 
   const [linkedin, setLinkedin] =
-    useState(user?.linkedin || '');
+    useState(
+      user?.linkedin || ''
+    );
 
-  const [bio, setBio] = useState(
-    user?.bio ||
-      'Passionate about learning programming and building modern web applications.'
-  );
+  const [bio, setBio] =
+    useState(
+      user?.bio ||
+        'Passionate about learning programming.'
+    );
 
   const [profileImage, setProfileImage] =
     useState(
       user?.profileImage ||
-        'https://i.pravatar.cc/150?img=5'
+        'https://i.pravatar.cc/300'
     );
 
-  /* Save */
-  const handleSave = (e) => {
-    e.preventDefault();
+  /* SKILLS */
+  const [skills, setSkills] =
+    useState(
+      user?.skills || [
+        {
+          name: 'HTML',
+          color: 'text-orange-500',
+        },
+
+        {
+          name: 'CSS',
+          color: 'text-blue-500',
+        },
+
+        {
+          name: 'JavaScript',
+          color: 'text-yellow-400',
+        },
+
+        {
+          name: 'React',
+          color: 'text-cyan-400',
+        },
+
+        {
+          name: 'Node.js',
+          color: 'text-green-500',
+        },
+
+        {
+          name: 'Express',
+          color: 'text-gray-700',
+        },
+
+        {
+          name: 'Tailwind',
+          color: 'text-sky-400',
+        },
+
+        {
+          name: 'MongoDB',
+          color: 'text-green-600',
+        },
+
+        {
+          name: 'TypeScript',
+          color: 'text-blue-500',
+        },
+
+        {
+          name: 'Next.js',
+          color: 'text-black',
+        },
+      ]
+    );
+
+  /* NEW SKILL */
+  const [newSkill, setNewSkill] =
+    useState('');
+
+  /* ADD SKILL */
+  const handleAddSkill = () => {
+
+    if (!newSkill.trim()) return;
+
+    const skillObject = {
+      name: newSkill,
+      color: 'text-[#5C45FD]',
+    };
+
+    setSkills([
+      ...skills,
+      skillObject,
+    ]);
+
+    setNewSkill('');
+  };
+
+  /* REMOVE */
+  const handleRemoveSkill = (
+    name
+  ) => {
+
+    const filteredSkills =
+      skills.filter(
+        (skill) =>
+          skill.name !== name
+      );
+
+    setSkills(filteredSkills);
+  };
+
+  /* SAVE */
+  const handleSave = () => {
+
+    /* CLEAN */
+    const cleanedSkills =
+      skills.map(
+        (skill) => ({
+          name: skill.name,
+          color: skill.color,
+        })
+      );
 
     const updatedUser = {
       ...user,
@@ -58,245 +205,400 @@ export default function EditProfilePage() {
       name: fullName,
       headline,
       location,
+      email,
+      phone,
+      website,
       github,
       linkedin,
       bio,
       profileImage,
+
+      skills: cleanedSkills,
     };
 
-    /* Save Updated User */
+    /* SAVE */
     localStorage.setItem(
       'user',
       JSON.stringify(updatedUser)
     );
 
     toast.success(
-      'Profile updated successfully!'
+      'Profile Updated 🚀'
     );
+
+    navigate('/profile');
   };
 
-  return (
-    <div className="min-h-screen bg-[#F5F6FA]">
+  /* ICONS */
+  const defaultIcons = {
+    HTML: <FaHtml5 />,
+    CSS: <FaCss3Alt />,
+    JavaScript:
+      <SiJavascript />,
+    React: <FaReact />,
+    'Node.js':
+      <FaNodeJs />,
+    GitHub: <FaGithub />,
+    Tailwind:
+      <SiTailwindcss />,
+    Express:
+      <SiExpress />,
+    MongoDB:
+      <SiMongodb />,
+    TypeScript:
+      <SiTypescript />,
+    'Next.js':
+      <SiNextdotjs />,
+  };
 
-      <div className="bg-white rounded-[32px] border border-gray-200 shadow-xl overflow-hidden">
+return (
+  <div
+    data-aos="fade-up"
+    className="min-h-screen overflow-x-hidden bg-[#F5F6FA] p-5 md:p-8"
+  >
 
-        {/* Header */}
-        <div className="h-52 bg-gradient-to-r from-[#B6A8FF] to-[#8E7BFF]" />
+    {/* HEADER */}
+    <div
+      data-aos="fade-down"
+      className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between"
+    >
 
-        {/* Content */}
-        <div className="px-6 md:px-10 pb-10">
+      <div>
 
-          {/* Avatar */}
-      {/* Avatar */}
-<div className="flex justify-center -mt-20">
+        <h1 className="text-4xl font-bold text-[#111827]">
+          Edit Profile
+        </h1>
 
-  <div className="relative">
+        <p className="mt-2 text-lg text-gray-400">
+          Manage your profile information.
+        </p>
+      </div>
 
-    <img
-      src={profileImage}
-      alt="profile"
-      className="w-40 h-40 rounded-full border-[8px] border-white object-cover shadow-lg"
-    />
+      {/* ACTIONS */}
+      <div
+        data-aos="fade-left"
+        data-aos-delay="200"
+        className="flex gap-4"
+      >
 
-    {/* Upload Image */}
-    <label className="absolute bottom-2 right-2 bg-[#5C45FD] text-white w-12 h-12 rounded-full cursor-pointer shadow-lg hover:bg-[#4A38E0] transition flex items-center justify-center text-xl">
-
-      📷
-
-      <input
-        type="file"
-        accept="image/*"
-        className="hidden"
-
-        onChange={(e) => {
-
-          const file = e.target.files[0];
-
-          if (file) {
-
-            const reader =
-              new FileReader();
-
-            reader.onloadend = () => {
-
-              setProfileImage(
-                reader.result
-              );
-            };
-
-            reader.readAsDataURL(file);
+        <button
+          onClick={() =>
+            navigate('/profile')
           }
-        }}
-      />
-    </label>
-  </div>
-</div>
+          className="rounded-2xl border border-gray-200 bg-white px-6 py-4 font-semibold text-gray-700 shadow-sm"
+        >
 
-          {/* Title */}
-          <div className="text-center mt-5">
+          Cancel
+        </button>
 
-            <h1 className="text-4xl font-bold text-gray-900">
-              Edit Profile
-            </h1>
+        <button
+          onClick={handleSave}
+          className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#5C45FD] to-[#7B61FF] px-7 py-4 font-semibold text-white shadow-lg"
+        >
 
-            <p className="mt-3 text-lg text-gray-500">
-              Update your personal information
-            </p>
+          <Save size={18} />
+
+          Save Changes
+        </button>
+      </div>
+    </div>
+
+    {/* GRID */}
+    <div
+      data-aos="fade-in"
+      data-aos-delay="300"
+      className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-3"
+    >
+
+      {/* LEFT */}
+      <div className="space-y-6">
+
+        {/* IMAGE */}
+        <div
+          data-aos="zoom-in"
+          className="rounded-[35px] border border-[#ECECEC] bg-white p-8 shadow-sm"
+        >
+
+          <h2 className="text-2xl font-bold text-[#111827]">
+            Profile Picture
+          </h2>
+
+          <div className="mt-8 flex justify-center">
+
+            <div
+              data-aos="fade-right"
+              data-aos-delay="400"
+              className="relative"
+            >
+
+              <img
+                src={profileImage}
+                alt="profile"
+                className="h-44 w-44 rounded-full border-4 border-white object-cover shadow-xl"
+              />
+
+              <label className="absolute bottom-2 right-2 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#5C45FD] text-white shadow-lg">
+
+                ✏️
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+
+                  onChange={(e) => {
+
+                    const file =
+                      e.target.files[0];
+
+                    if (file) {
+
+                      const reader =
+                        new FileReader();
+
+                      reader.onloadend =
+                        () => {
+
+                          setProfileImage(
+                            reader.result
+                          );
+                        };
+
+                      reader.readAsDataURL(
+                        file
+                      );
+                    }
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        {/* ABOUT */}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="500"
+          className="rounded-[35px] border border-[#ECECEC] bg-white p-8 shadow-sm"
+        >
+
+          <h2 className="text-2xl font-bold text-[#111827]">
+            About Me
+          </h2>
+
+          <textarea
+            rows="8"
+            value={bio}
+            onChange={(e) =>
+              setBio(
+                e.target.value
+              )
+            }
+            className="mt-6 w-full resize-none rounded-3xl border border-gray-200 px-5 py-5 outline-none focus:border-[#5C45FD]"
+          />
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <div className="space-y-6 xl:col-span-2">
+
+        {/* BASIC INFO */}
+        <div
+          data-aos="fade-right"
+          data-aos-delay="600"
+          className="rounded-[35px] border border-[#ECECEC] bg-white p-8 shadow-sm"
+        >
+
+          <h2 className="text-2xl font-bold text-[#111827]">
+            Basic Information
+          </h2>
+
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+
+            <InputField
+              label="Full Name"
+              value={fullName}
+              onChange={setFullName}
+            />
+
+            <InputField
+              label="Headline"
+              value={headline}
+              onChange={setHeadline}
+            />
+
+            <InputField
+              label="Location"
+              value={location}
+              onChange={setLocation}
+            />
+
+            <InputField
+              label="Website"
+              value={website}
+              onChange={setWebsite}
+            />
+
+            <InputField
+              label="Email"
+              value={email}
+              onChange={setEmail}
+            />
+
+            <InputField
+              label="Phone"
+              value={phone}
+              onChange={setPhone}
+            />
+          </div>
+        </div>
+
+        {/* SKILLS */}
+        <div
+          data-aos="zoom-in-up"
+          data-aos-delay="700"
+          className="rounded-[35px] border border-[#ECECEC] bg-white p-8 shadow-sm"
+        >
+
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+            <h2 className="text-2xl font-bold text-[#111827]">
+              Skills
+            </h2>
+
+            {/* ADD */}
+            <div className="flex gap-3">
+
+              <input
+                type="text"
+                value={newSkill}
+                onChange={(e) =>
+                  setNewSkill(
+                    e.target.value
+                  )
+                }
+                placeholder="Add skill..."
+                className="rounded-2xl border border-gray-200 px-5 py-3 outline-none focus:border-[#5C45FD]"
+              />
+
+              <button
+                onClick={handleAddSkill}
+                className="rounded-2xl bg-[#5C45FD] px-6 py-3 font-semibold text-white"
+              >
+
+                Add
+              </button>
+            </div>
           </div>
 
-          {/* Form */}
-          <form
-            className="space-y-8 mt-10"
-            onSubmit={handleSave}
-          >
+          {/* GRID */}
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
 
-            {/* Full Name */}
-            <div>
+            {skills.map(
+              (
+                skill,
+                index
+              ) => (
 
-              <label className="text-lg font-semibold text-gray-800">
-                Full Name
-              </label>
+                <div
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 100}
+                  key={index}
+                  className="flex items-center justify-between rounded-2xl border border-gray-100 bg-[#FAFAFF] px-5 py-4"
+                >
 
-              <input
-                type="text"
-                value={fullName}
-                onChange={(e) =>
-                  setFullName(
-                    e.target.value
-                  )
-                }
-                className="mt-3 w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none focus:border-[#5C45FD]"
-              />
-            </div>
+                  <div className="flex min-w-0 items-center gap-4">
 
-            {/* Headline */}
-            <div>
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm ${skill.color}`}
+                    >
 
-              <label className="text-lg font-semibold text-gray-800">
-                Headline
-              </label>
+                      {
+                        defaultIcons[
+                          skill.name
+                        ] || '🚀'
+                      }
+                    </div>
 
-              <input
-                type="text"
-                value={headline}
-                onChange={(e) =>
-                  setHeadline(
-                    e.target.value
-                  )
-                }
-                className="mt-3 w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none focus:border-[#5C45FD]"
-              />
-            </div>
+                    <span className="truncate font-semibold text-gray-700">
 
-            {/* Location */}
-            <div>
+                      {skill.name}
+                    </span>
+                  </div>
 
-              <label className="text-lg font-semibold text-gray-800">
-                Location
-              </label>
+                  <button
+                    onClick={() =>
+                      handleRemoveSkill(
+                        skill.name
+                      )
+                    }
+                    className="text-gray-400 transition hover:text-red-500"
+                  >
 
-              <div className="relative mt-3">
+                    <X size={18} />
+                  </button>
+                </div>
+              )
+            )}
+          </div>
+        </div>
 
-                <IoLocationSharp
-                  size={22}
-                  className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-                />
+        {/* SOCIAL */}
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="800"
+          className="rounded-[35px] border border-[#ECECEC] bg-white p-8 shadow-sm"
+        >
 
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) =>
-                    setLocation(
-                      e.target.value
-                    )
-                  }
-                  className="w-full rounded-2xl border border-gray-200 pl-14 pr-5 py-4 outline-none focus:border-[#5C45FD]"
-                />
-              </div>
-            </div>
+          <h2 className="text-2xl font-bold text-[#111827]">
+            Social Links
+          </h2>
 
-            {/* Github */}
-            <div>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
 
-              <label className="text-lg font-semibold text-gray-800">
-                GitHub
-              </label>
+            <InputField
+              label="GitHub"
+              value={github}
+              onChange={setGithub}
+            />
 
-              <div className="relative mt-3">
-
-                <FaGithub
-                  size={20}
-                  className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-                />
-
-                <input
-                  type="text"
-                  value={github}
-                  onChange={(e) =>
-                    setGithub(
-                      e.target.value
-                    )
-                  }
-                  placeholder="GitHub Username"
-                  className="w-full rounded-2xl border border-gray-200 pl-14 pr-5 py-4 outline-none focus:border-[#5C45FD]"
-                />
-              </div>
-            </div>
-
-            {/* Linkedin */}
-            <div>
-
-              <label className="text-lg font-semibold text-gray-800">
-                LinkedIn
-              </label>
-
-              <div className="relative mt-3">
-
-                <FaLinkedin
-                  size={20}
-                  className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-                />
-
-                <input
-                  type="text"
-                  value={linkedin}
-                  onChange={(e) =>
-                    setLinkedin(
-                      e.target.value
-                    )
-                  }
-                  className="w-full rounded-2xl border border-gray-200 pl-14 pr-5 py-4 outline-none focus:border-[#5C45FD]"
-                />
-              </div>
-            </div>
-
-            {/* Bio */}
-            <div>
-
-              <label className="text-lg font-semibold text-gray-800">
-                Bio
-              </label>
-
-              <textarea
-                rows="6"
-                value={bio}
-                onChange={(e) =>
-                  setBio(e.target.value)
-                }
-                className="mt-3 w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none resize-none focus:border-[#5C45FD]"
-              />
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full rounded-2xl bg-[#5C45FD] py-4 text-lg font-bold text-white shadow-lg shadow-indigo-100 transition hover:bg-[#4A38E0]"
-            >
-              Save Changes
-            </button>
-          </form>
+            <InputField
+              label="LinkedIn"
+              value={linkedin}
+              onChange={setLinkedin}
+            />
+          </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
+
+/* INPUT */
+function InputField({
+  label,
+  value,
+  onChange,
+}) {
+
+  return (
+    <div>
+
+      <label className="mb-3 block font-semibold text-gray-700">
+        {label}
+      </label>
+
+      <input
+        type="text"
+        value={value}
+        onChange={(e) =>
+          onChange(
+            e.target.value
+          )
+        }
+        className="w-full rounded-2xl border border-gray-200 bg-white px-5 py-4 outline-none transition focus:border-[#5C45FD]"
+      />
+    </div>
+  );
+} 

@@ -28,6 +28,7 @@ export default function Layout() {
     '/profile',
     '/editProfile',
     '/course-player',
+    '/certificates',
 
   ].includes(location.pathname);
 

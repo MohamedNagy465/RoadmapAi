@@ -1,5 +1,14 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React, {
+  useEffect,
+} from 'react';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import Layout from './layout/Layout';
 
@@ -15,112 +24,187 @@ import ReviewsPage from './assets/pegas/ReviewsPage/ReviewsPage';
 import ProfilePage from './assets/pegas/ProfilePage/ProfilePage';
 
 import EditProfilePage from './assets/components/EditProfilePage/EditProfilePage';
+
 import ProtectedRoute from './assets/components/ProtectedRoute';
+
 import CoursePlayerPage from './assets/pegas/CoursePlayerPage/CoursePlayerPage';
 
+import CertificatePage from './assets/pegas/CertificatePage/CertificatePage';
 
 function App() {
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Layout />,
+  useEffect(() => {
 
-      children: [
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 80,
+      easing: 'ease-in-out',
+    });
 
-        /* Public Pages */
-        {
-          index: true,
-          element: <HomePage />,
-        },
+  }, []);
 
-        {
-          path: 'login',
-          element: <LoginPage />,
-        },
+  const router =
+    createBrowserRouter([
+      {
+        path: '/',
+        element: <Layout />,
 
-        {
-          path: 'signup',
-          element: <Signup />,
-        },
+        children: [
 
-        /* Protected Pages */
-        {
-          path: 'roadmap',
-          element: (
-            <ProtectedRoute>
-              <RoadmapPage />
-            </ProtectedRoute>
-          ),
-        },
+          /* HOME */
+          {
+            index: true,
+            element:
+              <HomePage />,
+          },
 
-        {
-          path: 'chat',
-          element: (
-            <ProtectedRoute>
-              <ChatPage />
-            </ProtectedRoute>
-          ),
-        },
+          /* AUTH */
+          {
+            path: 'login',
+            element:
+              <LoginPage />,
+          },
 
-        {
-          path: 'dashboard',
-          element: (
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          ),
-        },
+          {
+            path: 'signup',
+            element:
+              <Signup />,
+          },
 
-        {
-          path: 'compare',
-          element: (
-            <ProtectedRoute>
-              <ComparePage />
-            </ProtectedRoute>
-          ),
-        },
-
-        {
-          path: 'reviews',
-          element: (
-            <ProtectedRoute>
-              <ReviewsPage />
-            </ProtectedRoute>
-          ),
-        },
-
-        {
-          path: 'profile',
-          element: (
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          ),
-        },
-
-        {
-          path: 'editProfile',
-          element: (
-            <ProtectedRoute>
-              <EditProfilePage />
-            </ProtectedRoute>
-          ),
-        },
-     {
-            path: 'course-player',
+          /* DASHBOARD */
+          {
+            path:
+              'dashboard',
 
             element: (
               <ProtectedRoute>
-                <CoursePlayerPage />
+
+                <DashboardPage />
+
               </ProtectedRoute>
             ),
           },
-      ],
-    },
-  ]);
 
-  return <RouterProvider router={router} />;
+          /* ROADMAP */
+          {
+            path:
+              'roadmap',
+
+            element: (
+              <ProtectedRoute>
+
+                <RoadmapPage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* CHAT */
+          {
+            path: 'chat',
+
+            element: (
+              <ProtectedRoute>
+
+                <ChatPage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* COMPARE */
+          {
+            path:
+              'compare',
+
+            element: (
+              <ProtectedRoute>
+
+                <ComparePage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* REVIEWS */
+          {
+            path:
+              'reviews',
+
+            element: (
+              <ProtectedRoute>
+
+                <ReviewsPage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* PROFILE */
+          {
+            path:
+              'profile',
+
+            element: (
+              <ProtectedRoute>
+
+                <ProfilePage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* EDIT PROFILE */
+          {
+            path:
+              'editProfile',
+
+            element: (
+              <ProtectedRoute>
+
+                <EditProfilePage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* COURSE PLAYER */
+          {
+            path:
+              'course-player',
+
+            element: (
+              <ProtectedRoute>
+
+                <CoursePlayerPage />
+
+              </ProtectedRoute>
+            ),
+          },
+
+          /* CERTIFICATES */
+          {
+            path:
+              'certificates',
+
+            element: (
+              <ProtectedRoute>
+
+                <CertificatePage />
+
+              </ProtectedRoute>
+            ),
+          },
+        ],
+      },
+    ]);
+
+  return (
+    <RouterProvider
+      router={router}
+    />
+  );
 }
 
 export default App;

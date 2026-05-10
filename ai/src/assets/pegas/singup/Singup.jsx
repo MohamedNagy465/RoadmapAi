@@ -114,426 +114,233 @@ export default function SignupPage() {
     }, 1000);
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8">
+ return (
+  <div
+    data-aos="fade-up"
+    className="min-h-screen overflow-x-hidden flex items-center justify-center p-4 md:p-8"
+  >
 
-      <div className="w-full max-w-5xl bg-white rounded-[32px] overflow-hidden border border-gray-200 shadow-xl grid grid-cols-1 md:grid-cols-2">
+    {/* CARD */}
+    <div
+      data-aos="zoom-in"
+      className="grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-xl md:grid-cols-2"
+    >
 
-        {/* Left Side */}
-        <div className="hidden md:flex relative overflow-hidden bg-gradient-to-br from-[#5C45FD] via-[#4F3EEA] to-[#3727B3] p-10 text-white flex-col">
+      {/* LEFT SIDE */}
+      <div
+        data-aos="fade-right"
+        className="relative hidden overflow-hidden bg-gradient-to-br from-[#5C45FD] via-[#4F3EEA] to-[#3727B3] p-10 text-white md:flex md:flex-col"
+      >
 
-          {/* Logo */}
-          <div className="flex items-center gap-3 z-10">
+        {/* LOGO */}
+        <div className="z-10 flex items-center gap-3">
 
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#5C45FD] font-bold text-xl shadow-lg">
-              R
-            </div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl font-bold text-[#5C45FD] shadow-lg">
 
-            <span className="text-xl font-bold tracking-wide">
-              Roadmap AI
-            </span>
+            R
           </div>
 
-          {/* Text */}
-          <div className="mt-20 z-10">
-
-            <h1 className="text-5xl font-bold leading-tight">
-              Start Your Journey Today! 🚀
-            </h1>
-
-            <p className="mt-5 text-lg text-indigo-100 max-w-[300px] leading-8">
-              Create an account and unlock
-              personalized learning roadmaps.
-            </p>
-          </div>
-
-          {/* Image */}
-          <div className="relative mt-auto flex justify-center z-10">
-
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
-              alt="Robot"
-              className="w-full max-w-[300px] drop-shadow-2xl"
-            />
-          </div>
+          <span className="text-xl font-bold tracking-wide">
+            Roadmap AI
+          </span>
         </div>
 
-        {/* Right Side */}
-        <div className="flex items-center justify-center p-8 md:p-14 bg-white">
+        {/* TEXT */}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="z-10 mt-20"
+        >
 
-          <div className="w-full max-w-sm">
+          <h1 className="text-5xl font-bold leading-tight">
 
-            <h2 className="text-4xl font-bold text-gray-900">
+            Start Your
+            AI Journey 🚀
+          </h1>
+
+          <p className="mt-5 max-w-[320px] text-lg leading-8 text-indigo-100">
+
+            Join Roadmap AI
+            and build your
+            future with smart
+            learning paths.
+          </p>
+        </div>
+
+        {/* FLOATING ICONS */}
+        <div className="absolute left-10 top-[48%] rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-xl backdrop-blur-md">
+
+          🤖
+        </div>
+
+        <div className="absolute right-10 top-[45%] rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-xl backdrop-blur-md">
+
+          ✨
+        </div>
+
+        <div className="absolute bottom-36 left-6 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-xl backdrop-blur-md">
+
+          🧠
+        </div>
+
+        {/* IMAGE */}
+        <div
+          data-aos="zoom-in-up"
+          data-aos-delay="300"
+          className="relative z-10 mt-auto flex flex-1 items-end justify-center pb-5"
+        >
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/8637/8637099.png"
+            alt="AI Illustration"
+            className="w-full max-w-[340px] object-contain drop-shadow-2xl"
+          />
+        </div>
+
+        {/* BLUR */}
+        <div className="absolute -bottom-20 -left-10 h-[300px] w-[300px] rounded-full bg-white/10 blur-3xl" />
+
+        <div className="absolute -right-20 -top-20 h-[250px] w-[250px] rounded-full bg-indigo-300/10 blur-3xl" />
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div
+        data-aos="fade-left"
+        data-aos-delay="400"
+        className="flex items-center justify-center bg-white p-8 md:p-14"
+      >
+
+        <div className="w-full max-w-md">
+
+          {/* TITLE */}
+          <div>
+
+            <h2 className="text-4xl font-bold text-[#111827]">
+
               Create Account
             </h2>
 
-            <p className="mt-2 text-gray-400">
-              Let’s get you started!
-            </p>
+            <p className="mt-3 text-gray-400">
 
-            {/* Form */}
-            <form
-              className="mt-10 space-y-5"
-              onSubmit={handleSignup}
+              Create your account
+              and continue your
+              learning journey.
+            </p>
+          </div>
+
+          {/* FORM */}
+          <form
+            data-aos="fade-up"
+            data-aos-delay="500"
+            className="mt-10 space-y-5"
+            onSubmit={handleSignup}
+          >
+
+            {/* NAME */}
+            <div>
+
+              <label className="mb-2 block font-medium text-gray-700">
+
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                value={name}
+                onChange={(e) =>
+                  setName(
+                    e.target.value
+                  )
+                }
+                placeholder="Enter your name"
+                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
+              />
+            </div>
+
+            {/* EMAIL */}
+            <div>
+
+              <label className="mb-2 block font-medium text-gray-700">
+
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                value={email}
+                onChange={(e) =>
+                  setEmail(
+                    e.target.value
+                  )
+                }
+                placeholder="Enter your email"
+                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
+              />
+            </div>
+
+            {/* PASSWORD */}
+            <div>
+
+              <label className="mb-2 block font-medium text-gray-700">
+
+                Password
+              </label>
+
+              <input
+                type="password"
+                value={password}
+                onChange={(e) =>
+                  setPassword(
+                    e.target.value
+                  )
+                }
+                placeholder="Enter password"
+                className="w-full rounded-2xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#5C45FD]"
+              />
+            </div>
+
+            {/* BUTTON */}
+            <button
+              type="submit"
+              className="w-full rounded-2xl bg-gradient-to-r from-[#5C45FD] to-[#7B61FF] py-4 text-lg font-semibold text-white shadow-lg transition hover:scale-[1.02]"
             >
 
-              {/* Full Name */}
-              <div>
+              Create Account
+            </button>
+          </form>
 
-                <label className="text-sm font-semibold text-gray-700">
-                  Full Name
-                </label>
+          {/* SOCIAL */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="600"
+            className="space-y-4"
+          >
 
-                <div className="relative mt-2">
+            <div className="my-8 flex items-center gap-4">
 
-                  <User
-                    size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  />
+              <div className="h-[1px] flex-1 bg-gray-200" />
 
-                  <input
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={name}
-                    onChange={(e) => {
-
-                      const value =
-                        e.target.value;
-
-                      setName(value);
-
-                      if (!value) {
-                        setNameError(
-                          'Full name is required'
-                        );
-                      }
-
-                      else if (
-                        value.length < 3
-                      ) {
-                        setNameError(
-                          'Name must be at least 3 characters'
-                        );
-                      }
-
-                      else {
-                        setNameError('');
-                      }
-                    }}
-                    className={`w-full rounded-xl border bg-white py-3 pl-12 pr-4 outline-none transition-all focus:border-[#5C45FD] ${
-                      nameError
-                        ? 'border-red-500'
-                        : 'border-gray-200'
-                    }`}
-                  />
-                </div>
-
-                {nameError && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {nameError}
-                  </p>
-                )}
-              </div>
-
-              {/* Email */}
-              <div>
-
-                <label className="text-sm font-semibold text-gray-700">
-                  Email
-                </label>
-
-                <div className="relative mt-2">
-
-                  <Mail
-                    size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  />
-
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => {
-
-                      const value =
-                        e.target.value;
-
-                      setEmail(value);
-
-                      const emailRegex =
-                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                      if (!value) {
-                        setEmailError(
-                          'Email is required'
-                        );
-                      }
-
-                      else if (
-                        !emailRegex.test(
-                          value
-                        )
-                      ) {
-                        setEmailError(
-                          'Please enter a valid email'
-                        );
-                      }
-
-                      else {
-                        setEmailError('');
-                      }
-                    }}
-                    className={`w-full rounded-xl border bg-white py-3 pl-12 pr-4 outline-none transition-all focus:border-[#5C45FD] ${
-                      emailError
-                        ? 'border-red-500'
-                        : 'border-gray-200'
-                    }`}
-                  />
-                </div>
-
-                {emailError && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {emailError}
-                  </p>
-                )}
-              </div>
-
-              {/* Password */}
-              <div>
-
-                <label className="text-sm font-semibold text-gray-700">
-                  Password
-                </label>
-
-                <div className="relative mt-2">
-
-                  <Lock
-                    size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  />
-
-                  <input
-                    type={
-                      showPassword
-                        ? 'text'
-                        : 'password'
-                    }
-                    placeholder="Create a password"
-                    value={password}
-                    onChange={(e) => {
-
-                      const value =
-                        e.target.value;
-
-                      setPassword(value);
-
-                      const passwordRegex =
-                        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/;
-
-                      if (!value) {
-                        setPasswordError(
-                          'Password is required'
-                        );
-                      }
-
-                      else if (
-                        value.length < 6
-                      ) {
-                        setPasswordError(
-                          'Password must be at least 6 characters'
-                        );
-                      }
-
-                      else if (
-                        !passwordRegex.test(
-                          value
-                        )
-                      ) {
-                        setPasswordError(
-                          'Must contain uppercase, lowercase and number'
-                        );
-                      }
-
-                      else {
-                        setPasswordError('');
-                      }
-                    }}
-                    className={`w-full rounded-xl border bg-white py-3 pl-12 pr-12 outline-none transition-all focus:border-[#5C45FD] ${
-                      passwordError
-                        ? 'border-red-500'
-                        : 'border-gray-200'
-                    }`}
-                  />
-
-                  {showPassword ? (
-                    <Eye
-                      size={18}
-                      onClick={() =>
-                        setShowPassword(
-                          false
-                        )
-                      }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-[#5C45FD]"
-                    />
-                  ) : (
-                    <EyeOff
-                      size={18}
-                      onClick={() =>
-                        setShowPassword(
-                          true
-                        )
-                      }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-[#5C45FD]"
-                    />
-                  )}
-                </div>
-
-                {passwordError && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {passwordError}
-                  </p>
-                )}
-              </div>
-
-              {/* Confirm Password */}
-              <div>
-
-                <label className="text-sm font-semibold text-gray-700">
-                  Confirm Password
-                </label>
-
-                <div className="relative mt-2">
-
-                  <Lock
-                    size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  />
-
-                  <input
-                    type={
-                      showConfirmPassword
-                        ? 'text'
-                        : 'password'
-                    }
-                    placeholder="Confirm your password"
-                    value={confirmPassword}
-                    onChange={(e) => {
-
-                      const value =
-                        e.target.value;
-
-                      setConfirmPassword(
-                        value
-                      );
-
-                      if (!value) {
-                        setConfirmPasswordError(
-                          'Please confirm your password'
-                        );
-                      }
-
-                      else if (
-                        value !==
-                        password
-                      ) {
-                        setConfirmPasswordError(
-                          'Passwords do not match'
-                        );
-                      }
-
-                      else {
-                        setConfirmPasswordError(
-                          ''
-                        );
-                      }
-                    }}
-                    className={`w-full rounded-xl border bg-white py-3 pl-12 pr-12 outline-none transition-all focus:border-[#5C45FD] ${
-                      confirmPasswordError
-                        ? 'border-red-500'
-                        : 'border-gray-200'
-                    }`}
-                  />
-
-                  {showConfirmPassword ? (
-                    <Eye
-                      size={18}
-                      onClick={() =>
-                        setShowConfirmPassword(
-                          false
-                        )
-                      }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-[#5C45FD]"
-                    />
-                  ) : (
-                    <EyeOff
-                      size={18}
-                      onClick={() =>
-                        setShowConfirmPassword(
-                          true
-                        )
-                      }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-[#5C45FD]"
-                    />
-                  )}
-                </div>
-
-                {confirmPasswordError && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {
-                      confirmPasswordError
-                    }
-                  </p>
-                )}
-              </div>
-
-              {/* Button */}
-              <button className="w-full rounded-xl bg-[#5C45FD] py-3.5 font-bold text-white shadow-lg shadow-indigo-100 transition-all hover:bg-[#4A38E0] active:scale-95">
-                Sign Up
-              </button>
-            </form>
-
-            {/* Divider */}
-            <div className="my-8 flex items-center">
-
-              <div className="h-[1px] flex-1 bg-gray-100"></div>
-
-              <span className="px-4 text-[10px] font-bold text-gray-400">
-                — OR —
+              <span className="text-sm text-gray-400">
+                OR
               </span>
 
-              <div className="h-[1px] flex-1 bg-gray-100"></div>
+              <div className="h-[1px] flex-1 bg-gray-200" />
             </div>
 
-            {/* Social */}
-            <div className="space-y-4">
+            <button className="flex w-full items-center justify-center gap-3 rounded-2xl border border-gray-200 bg-white py-4 font-semibold text-gray-700 transition hover:bg-gray-50">
 
-              <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white py-3 font-medium text-gray-700 transition hover:border-gray-300">
-                <FaGoogle className="text-lg" />
-                Continue with Google
-              </button>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
+                alt=""
+                className="h-5 w-5"
+              />
 
-              <button className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white py-3 font-medium text-gray-700 transition hover:border-gray-300">
-                <FaGithub className="text-lg" />
-                Continue with GitHub
-              </button>
-            </div>
-
-            {/* Login */}
-            <p className="mt-10 text-center text-sm text-gray-500">
-
-              Already have an account?
-
-              <Link
-                to="/login"
-                className="ml-2 font-bold text-[#5C45FD] hover:underline"
-              >
-                Login
-              </Link>
-            </p>
-
+              Continue with Google
+            </button>
           </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
