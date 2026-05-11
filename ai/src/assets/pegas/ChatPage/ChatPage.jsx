@@ -55,10 +55,12 @@ export default function ChatPage() {
         text: message,
       };
 
-      setMessages((prev) => [
-        ...prev,
+      const updatedMessages = [
+        ...messages,
         userMessage,
-      ]);
+      ];
+
+      setMessages(updatedMessages);
 
       const currentMessage =
         message;
@@ -69,42 +71,22 @@ export default function ChatPage() {
 
       try {
 
+        // Build conversation history for context-aware replies
+        const history = updatedMessages
+          .filter((m) => m.type === 'user' || m.type === 'ai')
+          .map((m) => ({
+            role: m.type === 'ai' ? 'assistant' : 'user',
+            content: m.text,
+          }));
+
         const response =
           await axios.post(
-            'https://openrouter.ai/api/v1/chat/completions',
-            {
-              model:
-                'openai/gpt-3.5-turbo',
-
-              messages: [
-                {
-                  role: 'system',
-                  content:
-                    'You are a helpful AI assistant for programming and career guidance.',
-                },
-
-                {
-                  role: 'user',
-                  content:
-                    currentMessage,
-                },
-              ],
-            },
-            {
-              headers: {
-                Authorization:
-                  'Bearer YOUR_API_KEY',
-
-                'Content-Type':
-                  'application/json',
-              },
-            }
+            'http://localhost:3001/api/chat',
+            { messages: history }
           );
 
         const aiReply =
-          response.data
-            .choices[0]
-            .message.content;
+          response.data.reply;
 
         setMessages((prev) => [
           ...prev,
@@ -121,6 +103,7 @@ export default function ChatPage() {
           {
             type: 'ai',
             text:
+              error?.response?.data?.error ||
               'Something went wrong. Please try again.',
           },
         ]);
