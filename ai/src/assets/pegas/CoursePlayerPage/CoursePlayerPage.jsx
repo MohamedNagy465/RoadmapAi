@@ -81,7 +81,7 @@ export default function CoursePlayerPage() {
               controls
               autoPlay
               className="h-[520px] w-full object-cover"
-              poster="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+              poster="https://images.unsplash.com/photo-1515879218  367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
             >
 
               <source
