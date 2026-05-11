@@ -10,7 +10,7 @@ import {
   Download,
   ArrowRight,
 } from 'lucide-react';
-
+import video1 from "../../video/WhatsApp Video 2026-05-11 at 15.19.35.mp4"
 export default function CoursePlayerPage() {
 
   const user =
@@ -85,7 +85,7 @@ export default function CoursePlayerPage() {
             >
 
               <source
-                src="/videos/react-course.mp4"
+                src={video1}
                 type="video/mp4"
               />
 
