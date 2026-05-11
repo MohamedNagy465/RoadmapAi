@@ -329,6 +329,10 @@ export default function ComparePage() {
         <UserRound size={16} />,
     },
   ];
+  /* DYNAMIC TABLE */
+const tableColumns =
+  `220px repeat(${selectedTracks.length}, minmax(250px, 1fr))`;
+
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] p-5 md:p-8">
@@ -498,10 +502,9 @@ export default function ComparePage() {
 
       {/* MAIN */}
       <div className="mt-8 grid grid-cols-1 gap-6 2xl:grid-cols-[1fr_340px]">
-
-        {/* TABLE */}
-      {/* TABLE */}
-<div className="overflow-hidden rounded-[32px] border border-[#ECECEC] bg-white shadow-sm">
+ 
+ {/* TABLE */}
+<div className="rounded-[32px] border  border-[#ECECEC] bg-white shadow-sm overflow-hidden">
 
   {/* HEADER */}
   <div className="flex items-center justify-between border-b border-[#F3F3F3] px-8 py-6">
@@ -522,15 +525,33 @@ export default function ComparePage() {
     </div>
   </div>
 
-  {/* TABLE */}
-  <div className="w-full overflow-hidden">
+  {/* TABLE SCROLL */}
+  <div
+    className={`${
+      selectedTracks.length >= 4
+        ? 'overflow-x-auto'
+        : 'overflow-hidden'
+    }`}
+  >
 
-    <div className="grid w-full">
+    <div
+      className={`${
+        selectedTracks.length >= 4
+          ? 'min-w-[1400px]'
+          : 'w-full'
+      }`}
+    >
 
       {/* HEAD */}
-      <div className="grid grid-cols-[220px_repeat(3,1fr)] bg-[#FAFAFF]">
+      <div
+        className="grid bg-[#FAFAFF]"
+        style={{
+          gridTemplateColumns:
+            tableColumns,
+        }}
+      >
 
-        <div className="border-r border-[#F1F1F1] p-4 lg:p-6 font-bold text-[#111827]">
+        <div className="border-r border-[#F1F1F1] p-5 font-bold text-[#111827]">
           Criteria
         </div>
 
@@ -539,24 +560,24 @@ export default function ComparePage() {
 
             <div
               key={track.id}
-              className="border-r border-[#F1F1F1] p-4 lg:p-6 last:border-r-0"
+              className="border-r border-[#F1F1F1] p-5 last:border-r-0"
             >
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
 
                 <div
-                  className={`flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-2xl text-xl lg:text-2xl text-white shadow-md ${track.iconBg}`}
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl text-white shadow-md ${track.iconBg}`}
                 >
                   {track.icon}
                 </div>
 
-                <div>
+                <div className="min-w-0">
 
-                  <h3 className="max-w-[160px] text-xs lg:text-sm font-bold leading-6 text-[#111827]">
+                  <h3 className="text-sm lg:text-base font-bold leading-7 text-[#111827] break-words">
                     {track.title}
                   </h3>
 
-                  <p className="mt-1 text-[11px] lg:text-xs text-gray-400">
+                  <p className="mt-1 text-xs text-gray-400">
                     {track.category}
                   </p>
                 </div>
@@ -572,15 +593,19 @@ export default function ComparePage() {
 
           <div
             key={row.key}
-            className={`grid grid-cols-[220px_repeat(3,1fr)] border-t border-[#F7F7F7] transition hover:bg-[#FAFAFF] ${
+            className={`grid border-t border-[#F7F7F7] transition hover:bg-[#FAFAFF] ${
               index % 2 === 0
                 ? 'bg-white'
                 : 'bg-[#FCFCFF]'
             }`}
+            style={{
+              gridTemplateColumns:
+                tableColumns,
+            }}
           >
 
             {/* LABEL */}
-            <div className="flex items-center gap-3 border-r border-[#F3F3F3] p-4 lg:p-6 font-semibold text-gray-700">
+            <div className="flex items-center gap-3 border-r border-[#F3F3F3] p-5 font-semibold text-gray-700">
 
               <div className="text-[#5C45FD]">
                 {row.icon}
@@ -597,7 +622,7 @@ export default function ComparePage() {
 
                 <div
                   key={track.id}
-                  className="border-r border-[#F3F3F3] p-4 lg:p-6 text-xs lg:text-sm leading-6 lg:leading-7 text-gray-600 last:border-r-0"
+                  className="flex items-center border-r border-[#F3F3F3] p-5 text-sm leading-7 text-gray-600 last:border-r-0"
                 >
 
                   {
@@ -613,9 +638,15 @@ export default function ComparePage() {
       )}
 
       {/* DIFFICULTY */}
-      <div className="grid grid-cols-[220px_repeat(3,1fr)] border-t border-[#F3F3F3] bg-white">
+      <div
+        className="grid border-t border-[#F3F3F3] bg-white"
+        style={{
+          gridTemplateColumns:
+            tableColumns,
+        }}
+      >
 
-        <div className="flex items-center gap-3 border-r border-[#F3F3F3] p-4 lg:p-6 font-semibold text-gray-700">
+        <div className="flex items-center gap-3 border-r border-[#F3F3F3] p-5 font-semibold text-gray-700">
 
           <Sparkles size={16} />
 
@@ -627,7 +658,7 @@ export default function ComparePage() {
 
             <div
               key={track.id}
-              className="border-r border-[#F3F3F3] p-4 lg:p-6 last:border-r-0"
+              className="flex items-center border-r border-[#F3F3F3] p-5 last:border-r-0"
             >
 
               <div className="flex gap-1">
@@ -654,9 +685,15 @@ export default function ComparePage() {
       </div>
 
       {/* TECH */}
-      <div className="grid grid-cols-[220px_repeat(3,1fr)] border-t border-[#F3F3F3] bg-[#FCFCFF]">
+      <div
+        className="grid border-t border-[#F3F3F3] bg-[#FCFCFF]"
+        style={{
+          gridTemplateColumns:
+            tableColumns,
+        }}
+      >
 
-        <div className="border-r border-[#F3F3F3] p-4 lg:p-6 font-semibold text-gray-700">
+        <div className="border-r border-[#F3F3F3] p-5 font-semibold text-gray-700">
           Technologies
         </div>
 
@@ -665,7 +702,7 @@ export default function ComparePage() {
 
             <div
               key={track.id}
-              className="border-r border-[#F3F3F3] p-4 lg:p-6 last:border-r-0"
+              className="border-r border-[#F3F3F3] p-5 last:border-r-0"
             >
 
               <div className="flex flex-wrap gap-2">
@@ -675,7 +712,7 @@ export default function ComparePage() {
 
                     <span
                       key={tech}
-                      className="rounded-full bg-[#F4EEFF] px-3 py-2 text-[11px] lg:text-xs font-semibold text-[#5C45FD]"
+                      className="rounded-full bg-[#F4EEFF] px-3 py-2 text-xs font-semibold text-[#5C45FD]"
                     >
                       {tech}
                     </span>
@@ -688,7 +725,13 @@ export default function ComparePage() {
       </div>
 
       {/* BUTTONS */}
-      <div className="grid grid-cols-[220px_repeat(3,1fr)] bg-white">
+      <div
+        className="grid bg-white"
+        style={{
+          gridTemplateColumns:
+            tableColumns,
+        }}
+      >
 
         <div />
 
@@ -697,14 +740,14 @@ export default function ComparePage() {
 
             <div
               key={track.id}
-              className="border-r border-[#F3F3F3] p-4 lg:p-6 last:border-r-0"
+              className="border-r border-[#F3F3F3] p-5 last:border-r-0"
             >
 
               <button
                 onClick={() =>
                   navigate('/roadmap')
                 }
-                className={`w-full rounded-2xl bg-gradient-to-r px-4 lg:px-5 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl ${track.color}`}
+                className={`w-full rounded-2xl bg-gradient-to-r px-5 py-4 text-sm font-semibold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl ${track.color}`}
               >
 
                 View Roadmap →
@@ -716,7 +759,6 @@ export default function ComparePage() {
     </div>
   </div>
 </div>
-
         {/* RIGHT */}
         <div className="space-y-6">
 

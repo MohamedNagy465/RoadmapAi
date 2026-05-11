@@ -60,7 +60,7 @@ export default function LoginPage() {
     setEmailError('');
     setPasswordError('');
 
-    /* Empty Fields */
+    /* EMPTY */
     if (!email) {
 
       setEmailError(
@@ -79,7 +79,7 @@ export default function LoginPage() {
       return;
     }
 
-    /* Email Validation */
+    /* EMAIL */
     const emailRegex =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -96,7 +96,7 @@ export default function LoginPage() {
       return;
     }
 
-    /* Password Length */
+    /* PASSWORD */
     if (
       password.length < 6
     ) {
@@ -108,66 +108,76 @@ export default function LoginPage() {
       return;
     }
 
-    /* Get User */
-    const savedUser =
-      JSON.parse(
-        localStorage.getItem(
-          'user'
-        )
-      );
+    /* USER */
+const users =
+  JSON.parse(
+    localStorage.getItem(
+      'users'
+    )
+  ) || [];
 
-    /* Check User */
-    if (
-      savedUser &&
-      savedUser.email ===
-        email &&
-      savedUser.password ===
-        password
-    ) {
+/* CHECK USER */
+const validUser =
+  users.find(
+    (user) =>
+      user.email === email &&
+      user.password === password
+  );
 
-      localStorage.setItem(
-        'isLoggedIn',
-        'true'
-      );
+if (validUser) {
 
-      toast.success(
-        'Login successful!'
-      );
+  /* LOGIN */
+  localStorage.setItem(
+    'isLoggedIn',
+    'true'
+  );
 
-      setTimeout(() => {
+  /* CURRENT USER */
+  localStorage.setItem(
+    'currentUser',
+    JSON.stringify(validUser)
+  );
 
-        navigate(
-          '/roadmap'
-        );
-      }, 1000);
+  toast.success(
+    'Login successful!'
+  );
 
-    } else {
+  setTimeout(() => {
 
-      setPasswordError(
-        'Invalid email or password'
-      );
-    }
-  };
+    navigate(
+      '/roadmap'
+    );
 
+  }, 1000);
+
+} else {
+
+  setPasswordError(
+    'Invalid email or password'
+  );
+}
+  }
   return (
     <div className="flex min-h-screen items-center justify-center overflow-x-hidden p-4 md:p-8">
 
+      {/* CARD */}
       <div
         data-aos="zoom-in"
         className="grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-xl md:grid-cols-2"
       >
 
-        {/* LEFT SIDE */}
+        {/* LEFT */}
         <div
           data-aos="fade-right"
           className="relative hidden flex-col overflow-hidden bg-gradient-to-br from-[#5C45FD] via-[#4F3EEA] to-[#3727B3] p-10 text-white md:flex"
         >
-            <Link
-                  to="/"
-                  data-aos="zoom-in"
-                  className="mb-10 flex items-center gap-3"
-                >
-  <div className="z-10 flex items-center gap-3">
+
+          {/* LOGO */}
+          <Link
+            to="/"
+            data-aos="zoom-in"
+            className="z-10 mb-10 flex items-center gap-3"
+          >
 
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl font-bold text-[#5C45FD] shadow-lg">
 
@@ -177,10 +187,7 @@ export default function LoginPage() {
             <span className="text-xl font-bold tracking-wide">
               Roadmap AI
             </span>
-          </div>
-                </Link>
-          {/* LOGO */}
-        
+          </Link>
 
           {/* TEXT */}
           <div className="z-10 mt-20">
@@ -229,7 +236,7 @@ export default function LoginPage() {
           <div className="absolute -right-20 -top-20 h-[250px] w-[250px] rounded-full bg-indigo-300/10 blur-3xl" />
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
         <div
           data-aos="fade-left"
           className="flex items-center justify-center bg-white p-8 md:p-14"
@@ -237,6 +244,7 @@ export default function LoginPage() {
 
           <div className="w-full max-w-sm">
 
+            {/* TITLE */}
             <h2 className="text-4xl font-bold text-gray-900">
               Login
             </h2>
@@ -267,7 +275,7 @@ export default function LoginPage() {
 
                   <Mail
                     size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#5C45FD]"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                   />
 
                   <input
@@ -311,7 +319,7 @@ export default function LoginPage() {
 
                   <Lock
                     size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#5C45FD]"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                   />
 
                   <input
@@ -373,12 +381,72 @@ export default function LoginPage() {
                 )}
               </div>
 
-              {/* BUTTON */}
+              {/* LOGIN BUTTON */}
               <button className="w-full rounded-xl bg-[#5C45FD] py-3.5 font-bold text-white shadow-lg shadow-indigo-100 transition-all hover:bg-[#4A38E0] active:scale-95">
 
                 Login
               </button>
             </form>
+
+            {/* SOCIAL */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="mt-8"
+            >
+
+              {/* DIVIDER */}
+              <div className="flex items-center gap-4">
+
+                <div className="h-[1px] flex-1 bg-gray-200" />
+
+                <span className="text-sm font-medium text-gray-400">
+                  OR CONTINUE WITH
+                </span>
+
+                <div className="h-[1px] flex-1 bg-gray-200" />
+              </div>
+
+              {/* BUTTONS */}
+              <div className="mt-6 grid grid-cols-2 gap-4">
+
+                {/* GOOGLE */}
+                <button
+                  type="button"
+                  className="flex items-center justify-center gap-3 rounded-2xl border border-gray-200 bg-white py-3 font-semibold text-gray-700 transition hover:border-[#5C45FD] hover:bg-[#F8F6FF]"
+                >
+
+                  <FaGoogle className="text-[#EA4335]" />
+
+                  Google
+                </button>
+
+                {/* GITHUB */}
+                <button
+                  type="button"
+                  className="flex items-center justify-center gap-3 rounded-2xl border border-gray-200 bg-white py-3 font-semibold text-gray-700 transition hover:border-[#5C45FD] hover:bg-[#F8F6FF]"
+                >
+
+                  <FaGithub />
+
+                  GitHub
+                </button>
+              </div>
+
+              {/* REGISTER */}
+              <p className="mt-8 text-center text-sm text-gray-500">
+
+                Don’t have an account?{' '}
+
+                <Link
+                  to="/signup"
+                  className="font-semibold text-[#5C45FD] transition hover:underline"
+                >
+
+                  Create Account
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -53,66 +53,92 @@ export default function SignupPage() {
   ] = useState('');
 
   /* Submit */
-  const handleSignup = (e) => {
-    e.preventDefault();
+ /* SUBMIT */
+const handleSignup = (e) => {
 
-    if (
-      nameError ||
-      emailError ||
-      passwordError ||
-      confirmPasswordError
-    ) {
-      toast.error(
-        'Please fix the errors first'
-      );
-      return;
-    }
+  e.preventDefault();
 
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !confirmPassword
-    ) {
-      toast.error(
-        'Please fill all fields'
-      );
-      return;
-    }
+  setEmailError('');
 
-    /* Existing User */
-    const existingUser = JSON.parse(
-      localStorage.getItem('user')
+  /* ERRORS */
+  if (
+    nameError ||
+    emailError ||
+    passwordError ||
+    confirmPasswordError
+  ) {
+
+    toast.error(
+      'Please fix the errors first'
     );
 
-    if (
-      existingUser &&
-      existingUser.email === email
-    ) {
-      setEmailError(
-        'Email already exists'
-      );
-      return;
-    }
+    return;
+  }
 
-    /* Save User */
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        name,
-        email,
-        password,
-      })
+  /* EMPTY */
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !confirmPassword
+  ) {
+
+    toast.error(
+      'Please fill all fields'
     );
 
-    toast.success(
-      'Account created successfully!'
+    return;
+  }
+
+  /* USERS */
+  const users =
+    JSON.parse(
+      localStorage.getItem(
+        'users'
+      )
+    ) || [];
+
+  /* CHECK EMAIL */
+  const existingUser =
+    users.find(
+      (user) =>
+        user.email === email
     );
 
-    setTimeout(() => {
-      navigate('/login');
-    }, 1000);
+  if (existingUser) {
+
+    setEmailError(
+      'Email already exists'
+    );
+
+    return;
+  }
+
+  /* NEW USER */
+  const newUser = {
+    name,
+    email,
+    password,
   };
+
+  /* SAVE */
+  users.push(newUser);
+
+  localStorage.setItem(
+    'users',
+    JSON.stringify(users)
+  );
+
+  toast.success(
+    'Account created successfully!'
+  );
+
+  setTimeout(() => {
+
+    navigate('/login');
+
+  }, 1000);
+};
 
  return (
   <div
